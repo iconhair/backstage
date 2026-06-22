@@ -443,19 +443,8 @@
 
   <script>
     const PASSWORD  = 'Anker';
-    const BASE_URL   = 'https://iconbacked-j9d2svxu.manus.space/api/app';
+    const APP_URL   = 'https://iconbacked-j9d2svxu.manus.space/api/app/';
     const SESSION_KEY = 'ib_auth_v2';
-
-    // Determine app URL based on current path
-    function getAppUrl() {
-      const path = window.location.pathname.replace(/\/+$/, ''); // strip trailing slash
-      if (path === '/eng' || path.startsWith('/eng/')) {
-        return BASE_URL + '/eng/';
-      } else if (path === '/admin' || path.startsWith('/admin/')) {
-        return BASE_URL + '/admin/';
-      }
-      return BASE_URL + '/';
-    }
 
     // Auto-login if session exists
     if (sessionStorage.getItem(SESSION_KEY) === '1') showApp();
@@ -478,11 +467,10 @@
     }
 
     function showApp() {
-      const appUrl = getAppUrl();
       document.getElementById('password-gate').classList.add('hidden');
       document.getElementById('presentation').classList.add('visible');
-      document.getElementById('app-iframe-desktop').src = appUrl;
-      document.getElementById('app-iframe-mobile').src  = appUrl;
+      document.getElementById('app-iframe-desktop').src = APP_URL;
+      document.getElementById('app-iframe-mobile').src  = APP_URL;
     }
 
     document.getElementById('password-input').addEventListener('keydown', function(e) {
