@@ -3,7 +3,7 @@
   "rewrites": [
     {
       "source": "/(.*)",
-      "destination": "https://iconbacked-j9d2svxu.manus.space/api/app/$1"
+      "destination": "/index.html"
     }
   ]
 }
