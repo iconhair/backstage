@@ -442,20 +442,36 @@
   </div>
 
   <script>
-    const PASSWORD  = 'Anker';
-    const APP_URL   = 'https://iconbacked-j9d2svxu.manus.space/api/app/';
+    const PASSWORD    = 'Anker';
+    const APP_URL     = 'https://iconbacked-j9d2svxu.manus.space/api/app/';
+    const ADMIN_URL   = 'https://iconbacked-j9d2svxu.manus.space/admin';
     const SESSION_KEY = 'ib_auth_v2';
+    const ADMIN_SESSION_KEY = 'ib_admin_auth_v1';
 
-    // Auto-login if session exists
-    if (sessionStorage.getItem(SESSION_KEY) === '1') showApp();
+    const isAdmin = window.location.pathname.startsWith('/admin');
+
+    if (isAdmin) {
+      // Admin path: redirect to Manus admin panel after password check
+      if (sessionStorage.getItem(ADMIN_SESSION_KEY) === '1') {
+        window.location.replace(ADMIN_URL);
+      }
+    } else {
+      // App path: auto-login if session exists
+      if (sessionStorage.getItem(SESSION_KEY) === '1') showApp();
+    }
 
     function checkPassword() {
       const input = document.getElementById('password-input');
       const error = document.getElementById('gate-error');
       if (input.value === PASSWORD) {
-        sessionStorage.setItem(SESSION_KEY, '1');
         error.textContent = '';
-        showApp();
+        if (isAdmin) {
+          sessionStorage.setItem(ADMIN_SESSION_KEY, '1');
+          window.location.replace(ADMIN_URL);
+        } else {
+          sessionStorage.setItem(SESSION_KEY, '1');
+          showApp();
+        }
       } else {
         error.textContent = 'Forkert adgangskode. Prøv igen.';
         input.value = '';
