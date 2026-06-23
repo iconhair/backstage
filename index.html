@@ -453,15 +453,44 @@
     const isEng   = window.location.pathname.startsWith('/eng');
     const activeAppUrl = isEng ? ENG_URL : APP_URL;
 
-    // Update UI text and logo for English version
+    // Update UI text, logo and design for English/Bookies version
     if (isEng) {
       const bookiesLogo = 'https://files.manuscdn.com/user_upload_by_module/session_file/310519663222833884/VaoRkBEOHwSTqnqP.png';
-      // Swap login gate logo
+
+      // Restyle the gate to Bookies brand (white bg, black text)
+      document.body.style.background = '#ffffff';
+      const gate = document.getElementById('password-gate');
+      gate.style.background = '#ffffff';
+
+      // Swap login gate logo — black logo on white bg, no invert
       const gateImg = document.querySelector('.gate-logo img');
-      if (gateImg) { gateImg.src = bookiesLogo; gateImg.alt = 'Bookies Hair Supplies'; gateImg.style.filter = 'invert(1) brightness(2)'; }
+      if (gateImg) { gateImg.src = bookiesLogo; gateImg.alt = 'Bookies Hair Supplies'; gateImg.style.filter = 'none'; }
+
+      // Restyle input to Bookies style
+      const input = document.querySelector('.gate-input');
+      if (input) {
+        input.style.border = '1.5px solid #000000';
+        input.style.background = '#ffffff';
+        input.style.color = '#000000';
+        input.style.borderRadius = '4px';
+        input.style.letterSpacing = '1px';
+      }
+
+      // Restyle button to Bookies style (black bg, white text)
+      const btn = document.querySelector('.gate-btn');
+      if (btn) {
+        btn.style.background = '#000000';
+        btn.style.color = '#ffffff';
+        btn.style.borderRadius = '4px';
+        btn.style.fontWeight = '800';
+        btn.style.letterSpacing = '1px';
+        btn.style.textTransform = 'uppercase';
+      }
+
       // Swap sidebar logo
       const sideImg = document.querySelector('.brand-logo img');
-      if (sideImg) { sideImg.src = bookiesLogo; sideImg.alt = 'Bookies Hair Supplies'; sideImg.style.filter = 'invert(1) brightness(2)'; sideImg.style.objectFit = 'contain'; }
+      if (sideImg) { sideImg.src = bookiesLogo; sideImg.alt = 'Bookies Hair Supplies'; sideImg.style.filter = 'none'; sideImg.style.objectFit = 'contain'; }
+
       document.querySelector('.brand-desc').textContent = 'Your salon in your pocket. Order products, follow campaigns, manage employees and track sales competitions — all in one place.';
       document.querySelector('.gate-input').placeholder = 'Password';
       document.querySelector('.gate-btn').textContent = 'Open app →';
