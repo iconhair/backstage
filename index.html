@@ -453,12 +453,19 @@
     const isEng   = window.location.pathname.startsWith('/eng');
     const activeAppUrl = isEng ? ENG_URL : APP_URL;
 
-    // Update UI text for English version
+    // Update UI text and logo for English version
     if (isEng) {
+      const bookiesLogo = 'https://files.manuscdn.com/user_upload_by_module/session_file/310519663222833884/VaoRkBEOHwSTqnqP.png';
+      // Swap login gate logo
+      const gateImg = document.querySelector('.gate-logo img');
+      if (gateImg) { gateImg.src = bookiesLogo; gateImg.alt = 'Bookies Hair Supplies'; gateImg.style.filter = 'invert(1) brightness(2)'; }
+      // Swap sidebar logo
+      const sideImg = document.querySelector('.brand-logo img');
+      if (sideImg) { sideImg.src = bookiesLogo; sideImg.alt = 'Bookies Hair Supplies'; sideImg.style.filter = 'invert(1) brightness(2)'; sideImg.style.objectFit = 'contain'; }
       document.querySelector('.brand-desc').textContent = 'Your salon in your pocket. Order products, follow campaigns, manage employees and track sales competitions — all in one place.';
       document.querySelector('.gate-input').placeholder = 'Password';
       document.querySelector('.gate-btn').textContent = 'Open app →';
-      document.querySelector('.brand-name').innerHTML = 'Icon<br /><span>Backstage</span>';
+      document.querySelector('.brand-name').innerHTML = 'Bookies<br /><span>Hair Supplies</span>';
     }
 
     if (isAdmin) {
