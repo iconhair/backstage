@@ -487,14 +487,34 @@
         btn.style.textTransform = 'uppercase';
       }
 
-      // Swap sidebar logo
+      // Restyle sidebar for Bookies
+      const brandInfo = document.querySelector('.brand-info');
+      if (brandInfo) brandInfo.style.background = 'transparent';
+
+      // Make brand-logo bigger and show Bookies logo
+      const brandLogoEl = document.querySelector('.brand-logo');
+      if (brandLogoEl) {
+        brandLogoEl.style.width = '200px';
+        brandLogoEl.style.height = '80px';
+        brandLogoEl.style.borderRadius = '0';
+        brandLogoEl.style.overflow = 'visible';
+      }
       const sideImg = document.querySelector('.brand-logo img');
-      if (sideImg) { sideImg.src = bookiesLogo; sideImg.alt = 'Bookies Hair Supplies'; sideImg.style.filter = 'none'; sideImg.style.objectFit = 'contain'; }
+      if (sideImg) { sideImg.src = bookiesLogo; sideImg.alt = 'Bookies Hair Supplies'; sideImg.style.filter = 'none'; sideImg.style.objectFit = 'contain'; sideImg.style.objectPosition = 'left center'; }
+
+      // Hide badge and brand-name
+      const badge = document.querySelector('.brand-badge');
+      if (badge) badge.style.display = 'none';
+      const brandName = document.querySelector('.brand-name');
+      if (brandName) brandName.style.display = 'none';
+
+      // Restyle description to black
+      const desc = document.querySelector('.brand-desc');
+      if (desc) { desc.style.color = '#000000'; desc.style.fontSize = '14px'; }
 
       document.querySelector('.brand-desc').textContent = 'Your salon in your pocket. Order products, follow campaigns, manage employees and track sales competitions — all in one place.';
       document.querySelector('.gate-input').placeholder = 'Password';
       document.querySelector('.gate-btn').textContent = 'Open app →';
-      document.querySelector('.brand-name').innerHTML = 'Bookies<br /><span>Hair Supplies</span>';
     }
 
     if (isAdmin) {
