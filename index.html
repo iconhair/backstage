@@ -444,11 +444,22 @@
   <script>
     const PASSWORD    = 'Anker';
     const APP_URL     = 'https://iconbacked-j9d2svxu.manus.space/api/app/';
+    const ENG_URL     = 'https://iconbacked-j9d2svxu.manus.space/api/app/eng';
     const ADMIN_URL   = 'https://iconbacked-j9d2svxu.manus.space/admin';
     const SESSION_KEY = 'ib_auth_v2';
     const ADMIN_SESSION_KEY = 'ib_admin_auth_v1';
 
     const isAdmin = window.location.pathname.startsWith('/admin');
+    const isEng   = window.location.pathname.startsWith('/eng');
+    const activeAppUrl = isEng ? ENG_URL : APP_URL;
+
+    // Update UI text for English version
+    if (isEng) {
+      document.querySelector('.brand-desc').textContent = 'Your salon in your pocket. Order products, follow campaigns, manage employees and track sales competitions — all in one place.';
+      document.querySelector('.gate-input').placeholder = 'Password';
+      document.querySelector('.gate-btn').textContent = 'Open app →';
+      document.querySelector('.brand-name').innerHTML = 'Icon<br /><span>Backstage</span>';
+    }
 
     if (isAdmin) {
       // Admin path: redirect to Manus admin panel after password check
@@ -473,7 +484,7 @@
           showApp();
         }
       } else {
-        error.textContent = 'Forkert adgangskode. Prøv igen.';
+        error.textContent = isEng ? 'Incorrect password. Try again.' : 'Forkert adgangskode. Prøv igen.';
         input.value = '';
         input.focus();
         input.style.animation = 'none';
@@ -485,8 +496,8 @@
     function showApp() {
       document.getElementById('password-gate').classList.add('hidden');
       document.getElementById('presentation').classList.add('visible');
-      document.getElementById('app-iframe-desktop').src = APP_URL;
-      document.getElementById('app-iframe-mobile').src  = APP_URL;
+      document.getElementById('app-iframe-desktop').src = activeAppUrl;
+      document.getElementById('app-iframe-mobile').src  = activeAppUrl;
     }
 
     document.getElementById('password-input').addEventListener('keydown', function(e) {
